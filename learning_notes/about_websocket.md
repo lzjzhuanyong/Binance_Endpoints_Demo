@@ -25,6 +25,8 @@
   在写的on_close函数中需要三个参数(ws,close_status_code,close_msg)，但之前设置回调的时候就没有传参，结果就是函数没正常调用。
   由于是在库里加的，实例化后也没报错，就有点摸不着头脑了。后面在设置了正确的参数后，就能正常回调触发on_close了，算是最终也搞定了后面那个问题。
   
+        # websocket-client/websocket/_app.py
+        
         def close(self, **kwargs):
         """
         close websocket connection.
@@ -37,7 +39,9 @@
         self._callback(self.on_close,None,None)
    
   但是手动在库里加东西总也不是个事，而要在外部主动关闭连接时去触发on_close，就只能手动去调了。
-  
+        
+        # WebSocketApp instance example
+        
         import websocket
         import time
 
